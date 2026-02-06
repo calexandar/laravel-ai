@@ -3,7 +3,7 @@
 use App\Models\User;
 use App\Ai\Agents\PersonalAssistant;
 use Illuminate\Support\Facades\Artisan;
-use Laravel\Ai\Files\Document;
+use Laravel\Ai\Files\Image;
 
 use function Laravel\Prompts\text;
 
@@ -16,7 +16,7 @@ Artisan::command('test:agent', function() {
         $response = PersonalAssistant::make()
         ->continue(conversationId: 'first_conversation', as: $user)
         ->prompt(prompt: $promt, attachments: [
-            Document::fromStorage(path: 'example.pdf', disk: 'local'),
+            Image::fromStorage(path: 'profile.png', disk: 'local'),
         ]);
 
         $this->info((string) $response);
