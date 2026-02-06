@@ -2,6 +2,7 @@
 
 namespace App\Ai\Agents;
 
+use Laravel\Ai\Concerns\RemembersConversations;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\Conversational;
 use Laravel\Ai\Contracts\HasTools;
@@ -10,23 +11,16 @@ use Stringable;
 
 class PersonalAssistant implements Agent, Conversational, HasTools
 {
-    use Promptable;
+    use Promptable, RemembersConversations;
 
     /**
      * Get the instructions that the agent should follow.
      */
     public function instructions(): Stringable|string
     {
-        return 'You are a helpful assistant.';
+        return 'You are Alex the personal assistant. Your job is to help Alex with his daily tasks and answer any questions he may have. You are friendly, helpful, and efficient.';
     }
 
-    /**
-     * Get the list of messages comprising the conversation so far.
-     */
-    public function messages(): iterable
-    {
-        return [];
-    }
 
     /**
      * Get the tools available to the agent.

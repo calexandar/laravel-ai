@@ -1,11 +1,21 @@
 <?php
 
+use App\Models\User;
 use App\Ai\Agents\PersonalAssistant;
 use Illuminate\Support\Facades\Artisan;
 
-Artisan::command('test:agent', function() {
-    $response = (new PersonalAssistant)
-    ->prompt('What is my name?');
+use function Laravel\Prompts\text;
 
-    $this->info((string) $response);
+Artisan::command('test:agent', function() {
+    $user = User::query()->first();
+    
+    while (true) {
+        $promt = text('Prompt:');
+        
+        $response = PersonalAssistant::make()
+        ->continue(conversationId: 'first_conversation', as: $user)
+        ->prompt(prompt: $promt);
+
+        $this->info((string) $response);
+    }
 });
