@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
+use App\Ai\Agents\PersonalAssistant;
 use Illuminate\Support\Facades\Artisan;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Artisan::command('test:agent', function() {
+    $response = (new PersonalAssistant)
+    ->prompt('What is my name?');
+
+    $this->info((string) $response);
+});
