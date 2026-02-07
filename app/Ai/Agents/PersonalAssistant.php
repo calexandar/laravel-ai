@@ -7,6 +7,7 @@ use Laravel\Ai\Promptable;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\HasTools;
 use Laravel\Ai\Contracts\Conversational;
+use Laravel\Ai\Providers\Tools\WebSearch;
 use Laravel\Ai\Concerns\RemembersConversations;;
 
 class PersonalAssistant implements Agent, Conversational, HasTools
@@ -29,7 +30,9 @@ class PersonalAssistant implements Agent, Conversational, HasTools
      */
     public function tools(): iterable
     {
-        return [];
+        return [
+            (new WebSearch())->max(5)->allow(['laravel.com'])
+        ];
     }
 
 }

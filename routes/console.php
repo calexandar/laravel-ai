@@ -13,12 +13,12 @@ Artisan::command('test:agent', function() {
     while (true) {
         $promt = text('Prompt:');
         
-        $stream = PersonalAssistant::make()
+        $response = PersonalAssistant::make()
         ->continue(conversationId: 'first_conversation', as: $user)
-        ->stream($promt);
+        ->prompt($promt);
 
-       foreach ($stream as $message) {
-            echo $message->content();
-        }
+        $this->info((string) $response);
+
+
     }
 });
