@@ -2,6 +2,7 @@
 
 namespace App\Ai\Agents;
 
+use App\Ai\Tools\GiveOneOfMySubscribers;
 use Stringable;
 use Laravel\Ai\Promptable;
 use Laravel\Ai\Contracts\Agent;
@@ -31,7 +32,7 @@ class PersonalAssistant implements Agent, Conversational, HasTools
     public function tools(): iterable
     {
         return [
-            (new WebSearch())->max(5)->allow(['laravel.com'])
+            new GiveOneOfMySubscribers(),
         ];
     }
 
