@@ -1,11 +1,13 @@
 <?php
 
 use App\Models\User;
+use Laravel\Ai\Files\Image;
+use function Laravel\Ai\agent;
+use function Laravel\Prompts\text;
+
 use App\Ai\Agents\PersonalAssistant;
 use Illuminate\Support\Facades\Artisan;
-use Laravel\Ai\Files\Image;
-
-use function Laravel\Prompts\text;
+use App\Ai\Tools\GiveOneOfMySubscribers;
 
 Artisan::command('test:agent', function() {
     $user = User::query()->first();
@@ -21,4 +23,16 @@ Artisan::command('test:agent', function() {
 
 
     }
+});
+
+Artisan::command('test:tool', function() {
+   $response = agent(
+    instructions: 'You are a helpful assistant that gives one of the subscribers of the user.',
+    messages: [
+        text('Give me one of my subscribers.'),
+    ],
+    tools: [
+        new GiveOneOfMySubscribers(),
+    ]
+   )->prompt('Give me one of my subscribers.');
 });
