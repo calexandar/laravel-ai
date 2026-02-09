@@ -3,6 +3,7 @@
 use App\Models\User;
 use Laravel\Ai\Image;
 use function Laravel\Ai\agent;
+use Laravel\Ai\Files;
 
 use function Laravel\Prompts\text;
 use App\Ai\Agents\PersonalAssistant;
@@ -37,9 +38,16 @@ Artisan::command('test:tool', function() {
    )->prompt('Give me one of my subscribers.');
 });
 
+
+
 Artisan::command('generate:image', function() {
-    $image = Image::of('A donut sitting on the kitchen counter')->generate();
+
+    $image = Image::of('A guy on attachment driving a lambo')->generate()
+                ->attachments([
+                    Files\Image::fromPath(storage_path('alex.jpg')),
+                ]);
  
     $image->storeAs('image.jpg');
+
     $this->info('Image generated and stored as image.jpg');
 });
