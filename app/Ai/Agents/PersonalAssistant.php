@@ -11,12 +11,13 @@ use Laravel\Ai\Attributes\MaxTokens;
 use Laravel\Ai\Attributes\Temperature;
 use App\Ai\Tools\GiveOneOfMySubscribers;
 use Laravel\Ai\Attributes\UseCheapestModel;
+use Laravel\Ai\Attributes\UseSmartestModel;
 use Laravel\Ai\Contracts\Conversational;
 use Laravel\Ai\Concerns\RemembersConversations;;
 
 
 
-#[UseCheapestModel]
+#[UseSmartestModel]
 class PersonalAssistant implements Agent, Conversational, HasTools
 {
     use Promptable, RemembersConversations;
