@@ -10,14 +10,13 @@ use Laravel\Ai\Attributes\MaxSteps;
 use Laravel\Ai\Attributes\MaxTokens;
 use Laravel\Ai\Attributes\Temperature;
 use App\Ai\Tools\GiveOneOfMySubscribers;
+use Laravel\Ai\Attributes\UseCheapestModel;
 use Laravel\Ai\Contracts\Conversational;
 use Laravel\Ai\Concerns\RemembersConversations;;
 
 
 
-#[MaxSteps(10)]
-#[MaxTokens(4096)]
-#[Temperature(0.7)]
+#[UseCheapestModel]
 class PersonalAssistant implements Agent, Conversational, HasTools
 {
     use Promptable, RemembersConversations;
