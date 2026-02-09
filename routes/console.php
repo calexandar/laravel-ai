@@ -1,22 +1,21 @@
 <?php
 
 use App\Models\User;
-use Laravel\Ai\Image;
-use Laravel\Ai\Audio
-use Laravel\Ai\agent;
+use Laravel\Ai\Audio;
 use Laravel\Ai\Files;
-use Laravel\Prompts\text;
+use Laravel\Ai\Image;
+use Laravel\Ai\Transcription;
 use App\Ai\Agents\PersonalAssistant;
 use Illuminate\Support\Facades\Artisan;
 use App\Ai\Tools\GiveOneOfMySubscribers;
 
-use function Symfony\Component\String\s;
+use function Laravel\Prompts\text;
 
 Artisan::command('test:agent', function() {
     $user = User::query()->first();
 
     while (true) {
-        $promt = text('Prompt:');
+        $promt = text('Promt:');
         
         $response = PersonalAssistant::make()
         ->continue(conversationId: 'first_conversation', as: $user)

@@ -3,6 +3,10 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use App\Ai\Agents\PersonalAssistant;
+use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -10,10 +14,14 @@ class ExampleTest extends TestCase
     /**
      * A basic test example.
      */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_the_personal_assistant(): void
     {
-        $response = $this->get('/');
+       PersonalAssistant::fake();
+       User::factory()->create();
 
-        $response->assertStatus(200);
+       $response = Artisan::call('test:agent')::make()
+        ->prompt('What is the name of one of my subscribers?');
+
+       PersonalAssistant::assertPrompted('What is the name of one of my subscribers?');
     }
 }
