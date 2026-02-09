@@ -10,6 +10,8 @@ use App\Ai\Agents\PersonalAssistant;
 use Illuminate\Support\Facades\Artisan;
 use App\Ai\Tools\GiveOneOfMySubscribers;
 
+use function Symfony\Component\String\s;
+
 Artisan::command('test:agent', function() {
     $user = User::query()->first();
 
@@ -63,3 +65,13 @@ Artisan::command('generate:audio', function() {
 
     $this->info('Audio generated and stored as audio.mp3');
 });
+
+Artisan::command('generate:transcript', function() {
+
+  $transcript = Transcription::fromStorage('audio.mp3')->generate();
+
+
+    $this->info((string) $transcript);
+});
+
+
