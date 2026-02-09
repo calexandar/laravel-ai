@@ -68,7 +68,7 @@ Artisan::command('generate:audio', function() {
 
 Artisan::command('generate:transcript', function() {
 
-  $transcript = Transcription::fromStorage('audio.mp3')->generate();
+  $transcript = Transcription::fromStorage('audio.mp3')->generate(provider: ['gemini', 'xai']);
 
 
     $this->info((string) $transcript);
