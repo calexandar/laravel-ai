@@ -2,10 +2,10 @@
 
 use App\Models\User;
 use Laravel\Ai\Image;
-use function Laravel\Ai\agent;
+use Laravel\Ai\Audio
+use Laravel\Ai\agent;
 use Laravel\Ai\Files;
-
-use function Laravel\Prompts\text;
+use Laravel\Prompts\text;
 use App\Ai\Agents\PersonalAssistant;
 use Illuminate\Support\Facades\Artisan;
 use App\Ai\Tools\GiveOneOfMySubscribers;
@@ -50,4 +50,16 @@ Artisan::command('generate:image', function() {
     $image->storeAs('image.jpg');
 
     $this->info('Image generated and stored as image.jpg');
+});
+
+
+Artisan::command('generate:audio', function() {
+
+   $audio = Audio::of('I love coding with Laravel.')
+    ->voice('voice-id-or-name')
+    ->generate();
+ 
+    $audio->storeAs('audio.mp3');
+
+    $this->info('Audio generated and stored as audio.mp3');
 });
